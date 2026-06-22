@@ -39,3 +39,13 @@ FROM analista a
 JOIN chamado_analista ca ON ca.id_analista = a.id_analista
 GROUP BY a.id_analista, a.nome
 ORDER BY total_chamados DESC;
+
+-- Serviços mais utilizados nos chamados
+SELECT
+    s.id_servico,
+    s.tipo,
+    COUNT(cs.id_chamado) AS qtd_utilizacoes
+FROM servico s
+JOIN chamado_servico cs ON cs.id_servico = s.id_servico
+GROUP BY s.id_servico, s.tipo
+ORDER BY qtd_utilizacoes DESC;
