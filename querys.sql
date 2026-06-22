@@ -69,3 +69,11 @@ JOIN chamado_analista ca ON ca.id_chamado = ch.id_chamado
 GROUP BY ch.id_chamado
 HAVING COUNT(ca.id_analista) > 1;
 
+-- Chamados que envolvem mais de um serviço
+SELECT
+    ch.id_chamado,
+    COUNT(cs.id_servico) AS qtd_servicos
+FROM chamado ch
+JOIN chamado_servico cs ON cs.id_chamado = ch.id_chamado
+GROUP BY ch.id_chamado
+HAVING COUNT(cs.id_servico) > 1;
