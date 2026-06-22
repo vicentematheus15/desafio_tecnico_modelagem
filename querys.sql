@@ -68,4 +68,4 @@ FROM chamado ch
 JOIN chamado_analista ca ON ca.id_chamado = ch.id_chamado
 GROUP BY ch.id_chamado
 HAVING COUNT(ca.id_analista) > 1;
-    
+
