@@ -49,3 +49,16 @@ FROM servico s
 JOIN chamado_servico cs ON cs.id_servico = s.id_servico
 GROUP BY s.id_servico, s.tipo
 ORDER BY qtd_utilizacoes DESC;
+
+-- Relação de contrato x quantidade de chamados
+SELECT
+    co.id_contrato,
+    co.status AS status_contrato,
+    COUNT(ch.id_chamado) AS qtd_chamados
+FROM contrato co
+LEFT JOIN chamado ch ON ch.id_contrato = co.id_contrato
+GROUP BY co.id_contrato, co.status
+ORDER BY qtd_chamados DESC;
+
+
+    
