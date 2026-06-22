@@ -60,5 +60,12 @@ LEFT JOIN chamado ch ON ch.id_contrato = co.id_contrato
 GROUP BY co.id_contrato, co.status
 ORDER BY qtd_chamados DESC;
 
-
+-- Chamados que possuem mais de um analista
+SELECT
+    ch.id_chamado,
+    COUNT(ca.id_analista) AS qtd_analistas
+FROM chamado ch
+JOIN chamado_analista ca ON ca.id_chamado = ch.id_chamado
+GROUP BY ch.id_chamado
+HAVING COUNT(ca.id_analista) > 1;
     
