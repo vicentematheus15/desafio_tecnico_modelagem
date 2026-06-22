@@ -30,4 +30,12 @@ WHERE ch.status IN ('Aberto', 'Em andamento')
 GROUP BY co.id_contrato
 ORDER BY chamados_ativos DESC;
 
-
+-- Chamados por analista
+SELECT
+    a.id_analista,
+    a.nome,
+    COUNT(ca.id_chamado) AS total_chamados
+FROM analista a
+JOIN chamado_analista ca ON ca.id_analista = a.id_analista
+GROUP BY a.id_analista, a.nome
+ORDER BY total_chamados DESC;
