@@ -77,3 +77,12 @@ FROM chamado ch
 JOIN chamado_servico cs ON cs.id_chamado = ch.id_chamado
 GROUP BY ch.id_chamado
 HAVING COUNT(cs.id_servico) > 1;
+
+-- Chamados por nível de analista
+SELECT
+    a.nivel,
+    COUNT(DISTINCT ca.id_chamado) AS qtd_chamados
+FROM analista a
+JOIN chamado_analista ca ON ca.id_analista = a.id_analista
+GROUP BY a.nivel
+ORDER BY qtd_chamados DESC;
