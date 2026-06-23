@@ -1,13 +1,3 @@
-Chamados ativos por cliente:
-Chamados ativos por contrato:
-Chamados por analista:
-Quais serviços são mais utilizados nos chamados:
-Relação de contrato x quantida de chamados:
-Chamados que possuem mais de um analista:
-Chamados que envolvem mais de um serviço:
-Chamados por nível de analista:
-Clientes que abriram chamados envolvendo mais de um serviço:
-
 -- Chamados ativos por cliente
 SELECT
     cli.id_cliente,
@@ -87,6 +77,7 @@ JOIN chamado_analista ca ON ca.id_analista = a.id_analista
 GROUP BY a.nivel
 ORDER BY qtd_chamados DESC;
 
+-- Clientes que abriram chamados envolvendo mais de um serviço
 SELECT
     cli.id_cliente,
     cli.razao_social
