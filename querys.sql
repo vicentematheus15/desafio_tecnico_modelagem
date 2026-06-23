@@ -86,3 +86,16 @@ FROM analista a
 JOIN chamado_analista ca ON ca.id_analista = a.id_analista
 GROUP BY a.nivel
 ORDER BY qtd_chamados DESC;
+
+SELECT
+    cli.id_cliente,
+    cli.razao_social
+FROM cliente cli
+JOIN contrato co ON co.id_cliente = cli.id_cliente
+JOIN chamado ch ON ch.id_contrato = co.id_contrato
+JOIN(
+    SELECT id_chamado
+    FROM chamado_servico
+    GROUP BY id_chamado
+    HAVING COUNT(cs.id_servico) > 1
+) multi_servico ON multi_servico.id_chamado = ch.id_chamado
