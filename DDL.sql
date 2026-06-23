@@ -10,20 +10,20 @@ CREATE TABLE cliente (
     razao_social    VARCHAR(150) NOT NULL
 );
 
--- CONTRATO  (N contratos : 1 cliente)
+-- CONTRATO 
 CREATE TABLE contrato (
     id_contrato     SERIAL PRIMARY KEY,
     id_cliente      INTEGER NOT NULL REFERENCES cliente(id_cliente),
     status          status_contrato_enum NOT NULL
 );
 
--- SERVICO (da pra criar uma tabela pros tipos de serviço, se forem muitos)
+-- SERVICO
 CREATE TABLE servico (
     id_servico      SERIAL PRIMARY KEY,
     tipo            VARCHAR(50) NOT NULL UNIQUE
 );
 
--- CONTRATO_SERVICO (N:N entre contrato e serviço)
+-- CONTRATO_SERVICO
 CREATE TABLE contrato_servico (
     id_contrato     INTEGER NOT NULL REFERENCES contrato(id_contrato),
     id_servico      INTEGER NOT NULL REFERENCES servico(id_servico),
@@ -37,7 +37,7 @@ CREATE TABLE analista (
     nivel           nivel_analista_enum NOT NULL
 );
 
--- CHAMADO (sempre vinculado a 1 contrato)
+-- CHAMADO
 CREATE TABLE chamado (
     id_chamado      SERIAL PRIMARY KEY,
     id_contrato     INTEGER NOT NULL REFERENCES contrato(id_contrato),
@@ -47,14 +47,14 @@ CREATE TABLE chamado (
     descricao       VARCHAR(255)
 );
 
--- CHAMADO_SERVICO (N:N entre chamado e serviço)
+-- CHAMADO_SERVICO
 CREATE TABLE chamado_servico (
     id_chamado      INTEGER NOT NULL REFERENCES chamado(id_chamado),
     id_servico      INTEGER NOT NULL REFERENCES servico(id_servico),
     PRIMARY KEY (id_chamado, id_servico)
 );
 
--- CHAMADO_ANALISTA (N:N entre chamado e analista)
+-- CHAMADO_ANALISTA
 CREATE TABLE chamado_analista (
     id_chamado      INTEGER NOT NULL REFERENCES chamado(id_chamado),
     id_analista     INTEGER NOT NULL REFERENCES analista(id_analista),
